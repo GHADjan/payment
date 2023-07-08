@@ -3,9 +3,9 @@ from database import get_db
 
 
 # Регистрация категории бизнеса
-def register_business_category_db(name: str):
+def register_business_category_db(category_name: str):
     db = next(get_db())
-    new_category = ServiceCategory(name=name)
+    new_category = ServiceCategory(category_name=category_name)
     db.add(new_category)
     db.commit()
 
@@ -30,7 +30,7 @@ def get_business_categories_db(exact_category_id: int = 0):
     if exact_category_id == 0:
         categories = db.query(ServiceCategory).all()
     else:
-        categories = db.query(ServiceCategory).filter_by(id=exact_category_id).all()
+        categories = db.query(ServiceCategory).filter_by(category_name=exact_category_id).all()
 
     return categories
 
@@ -45,6 +45,7 @@ def get_exact_business_db(business_id: int, category_id: int):
         return business
     else:
         return "Бизнес не найден"
+
 
 # Оплата услуги
 def pay_for_service_db(business_id: int, from_card: int, amount: float):
@@ -82,3 +83,4 @@ def delete_business_category_db(category_id: int):
         return "Бизнес категория успешно удален"
     else:
         return "Бизнес категория не найден"
+

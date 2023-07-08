@@ -5,8 +5,8 @@ from database import register_business_category_db, register_business_db, \
 
 # Регистрация категории бизнеса
 @app.post('/register-business-category')
-async def register_business_category_api(name: str):
-    result = register_business_category_db(name=name)
+async def register_business_category_api(category_name: str):
+    result = register_business_category_db(category_name=category_name)
 
     return {"status": 1, "message": result}
 
