@@ -3,7 +3,7 @@ from datetime import datetime
 
 from main import app
 from database import add_user_card_db, delete_user_card_db, \
-    get_user_cards_by_phone_number, \
+    get_user_cards_by_phone_number_db, \
     get_exact_user_card_db, get_all_cards_for_exact_transactions, transfer_money_db
 otp_test = {}
 
@@ -32,6 +32,7 @@ async def get_one_time_password(transfer_id: int = 0, user_id: int = 0):
         otp_test[user_id] = otp
 
     return {"status": 1, "message": otp}
+
 
 # Перевод денег
 @app.post('/transfer-user-money')

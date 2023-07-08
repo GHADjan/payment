@@ -44,7 +44,7 @@ class Transaction(Base):
     transaction_id = Column(Integer, autoincrement=True, primary_key=True)
     card_id = Column(Integer, ForeignKey('user_cards.card_id'))
     amount = Column(Float, nullable=False)
-    card_to = Column()
+    card_to = Column(Integer)
 
     transaction_date = Column(DateTime)
 
@@ -54,7 +54,7 @@ class Transaction(Base):
 # Таблица категорий сервисов
 class ServiceCategory(Base):
     __tablename__ = 'service_categories'
-    category_id = Column(Integer, autoincrement=True, primary_key=False)
+    category_id = Column(Integer, autoincrement=True, primary_key=True)
     category_name = Column(String, nullable=False)
 
     added_date = Column(DateTime)

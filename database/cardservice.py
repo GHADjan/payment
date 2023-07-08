@@ -1,6 +1,7 @@
 from database.models import Card, User, Transaction
 from database import get_db
 
+
 # Добавить карту в базу
 def add_user_card_db(**kwargs):
     db = next(get_db())
@@ -18,6 +19,7 @@ def add_user_card_db(**kwargs):
 
     return "Карта успешно добавлена"
 
+
 # Удалить карту из сервиса
 def delete_user_card_db(card_id, user_id):
     db = next(get_db())
@@ -30,16 +32,13 @@ def delete_user_card_db(card_id, user_id):
     else:
         return "Карта не найдена"
 
-# Получить все карты по номеру телефона
-def get_user_cards_by_phone_number(phone_number):
-    db = next(get_db())
-    user = db.query(User).filter_by(phone_number=phone_number).first()
 
-    if user:
-        cards = db.query(Card).filter_by(user_id=user.id).all()
-        return cards
-    else:
-        return "Пользователь не найден"
+# Получить все карты по номеру телефона
+def get_user_cards_by_phone_number_db(phone_number):
+    db = next(get_db())
+    checker = db.query(User).filter_by(phone_number == phone_number).all()
+
+    return checker
 
 
 # Получить определенную карту

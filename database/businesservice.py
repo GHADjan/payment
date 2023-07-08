@@ -15,13 +15,14 @@ def register_business_category_db(name: str):
 # Регистрация бизнеса
 def register_business_db(category_id: int, name: str, card_number: int):
     db = next(get_db())
-    new_business = Service(category_id=category_id,
-                           name=name,
-                           card_number=card_number)
+    new_business = Service(service_categories=category_id,
+                           service_name=name,
+                           service_check=card_number)
     db.add(new_business)
     db.commit()
 
     return "Бизнес успешно зарегистрирован"
+
 
 # Вывод всех категорий
 def get_business_categories_db(exact_category_id: int = 0):
@@ -37,7 +38,7 @@ def get_business_categories_db(exact_category_id: int = 0):
 # Вывод услуг
 def get_exact_business_db(business_id: int, category_id: int):
     db = next(get_db())
-    business = db.query(Service).filter_by(id=business_id,
+    business = db.query(Service).filter_by(service_id=business_id,
                                            category_id=category_id).first()
 
     if business:
@@ -56,10 +57,11 @@ def pay_for_service_db(business_id: int, from_card: int, amount: float):
 
     return "Услуга успешно оплачена"
 
+
 # Удалить бизнес
 def delete_business_db(business_id: int):
     db = next(get_db())
-    business = db.query(Service).filter_by(id=business_id).first()
+    business = db.query(Service).filter_by(service_id=business_id).first()
 
     if business:
         db.delete(business)
@@ -67,3 +69,16 @@ def delete_business_db(business_id: int):
         return "Бизнес успешно удален"
     else:
         return "Бизнес не найден"
+
+
+# Удалить категорию
+def delete_business_category_db(category_id: int):
+    db = next(get_db())
+    category = db.query(Service).filter_by(category_id=category_id).first()
+
+    if category:
+        db.delete(category)
+        db.commit()
+        return "Бизнес категория успешно удален"
+    else:
+        return "Бизнес категория не найден"
