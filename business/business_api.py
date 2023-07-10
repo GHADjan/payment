@@ -31,9 +31,9 @@ async def get_business_categories_api(exact_category_id: int = 0):
 
 # Вывод услуг
 @app.get('/get-business')
-async def get_exact_business_api(business_id: int, category_id: int):
+async def get_exact_business_api(business_id: int, service_categories: int):
     business = get_exact_business_db(business_id=business_id,
-                                     category_id=category_id)
+                                     service_categories=service_categories)
 
     return {"status": 1, "business": business}
 

@@ -57,6 +57,6 @@ async def get_exact_or_all_cards(user_id: int, card: int = 0):
 
 # Вывод истории карты
 @app.get('/get-card-monitoring')
-async def get_exact_all_card_monitoring(user_id: int,card: int = 0):
-    result = get_all_cards_for_exact_transactions(user_id, card)
+async def get_exact_all_card_monitoring(transaction_id: int, card_id: int = 0):
+    result = get_all_cards_for_exact_transactions(transaction_id, card_id)
     return {'status': 1, 'messaage': result}

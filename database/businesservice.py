@@ -36,10 +36,10 @@ def get_business_categories_db(exact_category_id: int = 0):
 
 
 # Вывод услуг
-def get_exact_business_db(business_id: int, category_id: int):
+def get_exact_business_db(business_id: int, service_categories: int):
     db = next(get_db())
     business = db.query(Service).filter_by(service_id=business_id,
-                                           category_id=category_id).first()
+                                           service_categories=service_categories).first()
 
     if business:
         return business
