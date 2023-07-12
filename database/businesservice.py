@@ -75,7 +75,7 @@ def delete_business_db(business_id: int):
 # Удалить категорию
 def delete_business_category_db(category_id: int):
     db = next(get_db())
-    category = db.query(Service).filter_by(category_id=category_id).first()
+    category = db.query(Service).filter_by(service_id=category_id).first()
 
     if category:
         db.delete(category)

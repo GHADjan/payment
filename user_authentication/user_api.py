@@ -7,15 +7,15 @@ from datetime import datetime
 @app.post('/register-user')
 async def register_user_api(phone_number: int, name: str, pincode: int, password: str):
     result = register_user_db(phone_number=phone_number, name=name,
-                              password=password, pincode=pincode, reg_date=datetime.now())
+                              password=password, pincode=pincode)
 
     return {'status': 1, 'message': result}
 
 
 # Вход в аккаунт
 @app.get('/login')
-async def login_user_api(phone_number: int, password: str):
-    result = register_user_db(phone_number=phone_number, password=password)
+async def login_user_api(phone_number: int, password: str, name: str, pincode: int):
+    result = register_user_db(phone_number=phone_number, password=password, name=name, pincode=pincode)
 
     return {'status': 1, 'message': result}
 

@@ -56,7 +56,7 @@ async def delete_business_api(business_id: int):
     return {"status": 1, "message": result}
 
 
-@app.delete('/delete-business')
+@app.delete('/delete-business_category')
 async def delete_business_category_api(category_id: int):
     result = delete_business_category_db(category_id=category_id)
 

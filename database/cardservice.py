@@ -36,7 +36,7 @@ def delete_user_card_db(card_id, user_id):
 # Получить все карты по номеру телефона
 def get_user_cards_by_phone_number_db(phone_number):
     db = next(get_db())
-    checker = db.query(User).filter_by(phone_number == phone_number).all()
+    checker = db.query(Card).filter(User.phone_number==phone_number).all()
 
     return checker
 
@@ -57,9 +57,8 @@ def get_exact_user_card_db(user_id, card_id):
 def get_all_cards_for_exact_transactions(transaction_id, card_id: int = 0):
     db = next(get_db())
     if card_id == 0:
-        card_monitor = db.query(Transaction).filter_by(transaction_id=transaction_id, card_id=card_id).all()
-
+        card_monitor = db.query(Transaction).filter_by(transaction_id=transaction_id).all()
     else:
-        card_monitor = db.query(Transaction). filter_by(transaction_id=transaction_id, card_id=card_id).all()
-
+        card_monitor = db.query(Transaction).filter_by(transaction_id=transaction_id, card_id=card_id).all()
     return card_monitor
+

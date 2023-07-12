@@ -1,28 +1,24 @@
 from database.models import User, Password
 from database import get_db
 
+
 # Регистрация пользователя
-def register_user_db(**kwargs):
+def register_user_db(phone_number: int, name: str, password: str, pincode: int):
     db = next(get_db())
-    phone_number = kwargs.get('phone_number')
-
-    # проверка номера
+    # Проверка номера
     checker = db.query(User).filter_by(phone_number=phone_number).first()
-
     if checker:
-        return "Пользователь с таким номером уже есть в базе"
-
-    # Если нет пользователя в баз, то регистрация
-    new_user = User(**kwargs)
+        return "Пользователь с таким номером уже есть в БД"
+    # Если нет пользователя в БД
+    new_user = User(phone_number=phone_number, name=name)
     db.add(new_user)
     db.commit()
-
-    # Создать пароль для пользователя
-    new_user_password = Password(user_id=new_user.user_id, **kwargs)
+    new_user_password = Password(user_id=new_user.user_id, password=password, pincode=pincode)
     db.add(new_user_password)
     db.commit()
 
-    return "Пользователь успешно добавлен в базу"
+    return "Пользователь успешно создан"
+
 
 # Проверка пароля
 def check_password_db(phone_number, password):
